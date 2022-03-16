@@ -43,16 +43,14 @@ promoGenre.innerText = 'драма';
 const promoBg = document.querySelector('.promo__bg');
 const address = '../img/bg.jpg';
 promoBg.style.background = `url(${address}) center center/cover no-repeat`;
+
 /*4 и 5 задание*/
-const promoInteractiveItems = document.querySelectorAll('.promo__interactive-item');
+const movieList = document.querySelector('.promo__interactive-list');
 
-for(let i = 0; i < movieDB.movies.length; i++) {
-    promoInteractiveItems[i].textContent = movieDB.movies.sort()[i];
-    promoInteractiveItems[i].insertAdjacentHTML('afterbegin', `<span>${i+1}</span>`);
-}
-const spans = document.querySelectorAll('li > span');
-spans.forEach(span => {
-    console.log(span.style.background);
+movieList.innerHTML = '';
+
+movieDB.movies.forEach((item, i) => {
+    let HTML = `<li class="promo__interactive-item">${i+1} ${[item]}<div class="delete"></div></li>`;
+    movieList.innerHTML += HTML;
+    i++;
 });
-
-
