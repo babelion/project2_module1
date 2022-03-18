@@ -57,37 +57,55 @@ function addMovie(database) {
     });    
 }
 
+function addSingleMovie(movie) {
+    let HTML = `<li class="promo__interactive-item">${i+1} ${[item]}<div class="delete"></div></li>`;
+    movieList.innerHTML += HTML;
+}
+
+function deleteMovie (list) {
+    movieList.addEventListener('click', e => {
+        if(e.target.className === 'delete') {
+            let num = e.target.parentElement.textContent[0];
+            movieDB.movies.splice(movieDB.movies.indexOf(num-1), 1);
+            e.target.parentElement.remove();
+        }
+    });
+}
+
 addMovie(movieDB.movies);
+deleteMovie(movieList);
+
 
 
 /*1 задание*/
 const form = document.querySelector(".add");
 const input = form.querySelector('.adding__input');
+
+
+
 form.addEventListener('submit', e => {
     e.preventDefault();
     movieDB.movies.push(input.value);
     movieDB.movies.sort();
     movieList.innerHTML = '';
     addMovie(movieDB.movies);
+    deleteMovie(movieList);
 
 });
 
 /*2 задание*/
 const listItems = document.querySelectorAll('.promo__interactive-item');
 listItems.forEach(item => {
+
     if(item.textContent.length > 21){
-        item.textContent = `${item.textContent.substr(0,21)}...`;
+        let html = document.createElement('div');
+        html.className = 'delete';
+        item.textContent= `${item.textContent.substr(0,21)}...`;
+        item.appendChild(html);
     }
 });
 
-/*3 задание*/ 
-const deleters = document.querySelectorAll('.delete');
-
-deleters.forEach(deleteItem => {
-    deleteItem.addEventListener('click', e => {
-        e.target.parentElement.remove();
-    });
-});
+/*3 задание*/
 
 /*4 задание*/
 
