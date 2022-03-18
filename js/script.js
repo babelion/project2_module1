@@ -57,11 +57,6 @@ function addMovie(database) {
     });    
 }
 
-function addSingleMovie(movie) {
-    let HTML = `<li class="promo__interactive-item">${i+1} ${[item]}<div class="delete"></div></li>`;
-    movieList.innerHTML += HTML;
-}
-
 function deleteMovie (list) {
     movieList.addEventListener('click', e => {
         if(e.target.className === 'delete') {
