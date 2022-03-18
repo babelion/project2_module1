@@ -49,8 +49,49 @@ const movieList = document.querySelector('.promo__interactive-list');
 
 movieList.innerHTML = '';
 
-movieDB.movies.forEach((item, i) => {
-    let HTML = `<li class="promo__interactive-item">${i+1} ${[item]}<div class="delete"></div></li>`;
-    movieList.innerHTML += HTML;
-    i++;
+function addMovie(database) {
+    database.forEach((item, i) => {
+        let HTML = `<li class="promo__interactive-item">${i+1} ${[item]}<div class="delete"></div></li>`;
+        movieList.innerHTML += HTML;
+        i++;
+    });    
+}
+
+addMovie(movieDB.movies);
+
+
+/*1 задание*/
+const form = document.querySelector(".add");
+const input = form.querySelector('.adding__input');
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    movieDB.movies.push(input.value);
+    movieDB.movies.sort();
+    movieList.innerHTML = '';
+    addMovie(movieDB.movies);
+
 });
+
+/*2 задание*/
+const listItems = document.querySelectorAll('.promo__interactive-item');
+listItems.forEach(item => {
+    if(item.textContent.length > 21){
+        item.textContent = `${item.textContent.substr(0,21)}...`;
+    }
+});
+
+/*3 задание*/ 
+const deleters = document.querySelectorAll('.delete');
+
+deleters.forEach(deleteItem => {
+    deleteItem.addEventListener('click', e => {
+        e.target.parentElement.remove();
+    });
+});
+
+/*4 задание*/
+
+const checkbox = form.querySelector("input[type='checkbox']");
+checkbox.addEventListener('click', () => {
+    console.log("Добавляем любимый фильм");
+}, {once: true});
